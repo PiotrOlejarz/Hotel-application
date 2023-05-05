@@ -8,9 +8,7 @@
 
 
 int main() {
-    Users nowy_ziom;
-    int xd{8635};
-    nowy_ziom.just_display(xd);
+   
     //std::string value_to_find {};
     //std::cin >> value_to_find;
     //menu_switcher();
