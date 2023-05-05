@@ -1,0 +1,3 @@
+C:/Users/polej/CLionProjects/FunWithObject/cmake-build-debug/CMakeFiles/FunWithObject.dir
+C:/Users/polej/CLionProjects/FunWithObject/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/polej/CLionProjects/FunWithObject/cmake-build-debug/CMakeFiles/rebuild_cache.dir
