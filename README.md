@@ -1,7 +1,7 @@
 # Hotel-application
 Simply hotel application, still in progress, 
 
-Premier date probablby 15.05.2023.
+Premier date probably 15.05.2023.
 
 It'll be simply hotel application. I'm usuing two maps, and initializ from by file constructor. 
 
