@@ -5,6 +5,7 @@
 #ifndef FUNWITHOBJECT_CHECKERS_H
 #define FUNWITHOBJECT_CHECKERS_H
 #include <iostream>
+#include <limits>
 #include <ctype.h>
 bool name_checker(std::string  name_to_check){
     size_t meter{};
@@ -55,9 +56,31 @@ bool personal_number_checker(std::string personal_number){
         else
             return false;
 
+}
+int is_room_ok(){
+    int room{};
+    do {
+        std::cin >> room;
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Invalid value. Try again: ";
+            return 0;
+        }
+    }while(std::cin.fail());
 
+        return room;
 
+}
+std::string connect_address(){
+    std::string change_spaces{};
 
+    std::getline(std::cin,  change_spaces);
+    for(int i{0}; i<change_spaces.size(); i++){
+        if(change_spaces[i] == ' ')
+            change_spaces[i] = '&';
+    }
+    return change_spaces;
 }
 
 #endif //FUNWITHOBJECT_CHECKERS_H

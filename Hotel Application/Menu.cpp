@@ -5,7 +5,7 @@
 
 
 #include <iostream>
-#include "Users.h"
+
 
 
 void display_menu();
@@ -18,4 +18,11 @@ std::string get_address();
 bool name_checker(std::string name_to_check);
 bool personal_number_checker();
 bool check_number_phone(std::string number_phone);
+void case1();
+std::string connect_address(std::string change_spaces); // function changing spaces to &
+void case2();
+void case3();
+void display_guest_by_code(int guest_number);
+
+
 

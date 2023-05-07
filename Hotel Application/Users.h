@@ -14,7 +14,7 @@ class Users {
 
 private:
     std::map<int, std::vector<std::string>> people_in_group; // map to connect special user number and client data, this
-    std::string user_name;                                  //special code is generating
+    std::string user_name;                                  //special code is generating in method get_special_code()
     std::string user_last_name;
     std::string phone_number;
     std::string personal_id_number;
@@ -29,9 +29,9 @@ public:
 
     void get_contact_details(std::string phone_number, std::string address);
 
-    int get_special_code(int new_special_code);
+    int get_special_code();
     void save_user_to_file();
-    void just_display(int key);
+    void just_display(int key, int &&value);
 
 };
 

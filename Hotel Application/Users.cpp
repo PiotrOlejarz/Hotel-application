@@ -8,30 +8,27 @@
 #include <sstream>
 
 
-Users::Users(): people_in_group(){
-
+Users::Users() {
     std::ifstream file("guestse.txt");
     if (file.is_open()) {
+        std::string line;
+        while (std::getline(file, line)) {
+            std::stringstream ss(line);
+            int code;
+            std::vector<std::string> data(5);
 
-        int key;
-        std::string value;
-        while (file >> key) {
-            std::vector<std::string> values;
-            for (int i = 0; i < 8; i++) {
-                file >> value;
-                values.push_back(value);
+            ss >> code;
+            for (int i = 0; i < 5; i++) {
+                ss >> data[i];
             }
-            people_in_group[key] = values;
-
+            people_in_group[code] = data;
         }
-        this->people_in_group = people_in_group;
+        file.close();
     }
     else {
-        std::cerr << "Unable to open file!" << std::endl;
+        std::cerr << "Error opening file." << std::endl;
     }
-    file.close();
-
-    }
+}
 
 
 void Users::get_personal_data(std::string new_user_name, std::string new_user_last_name, std::string new_personal_id_number){
@@ -44,8 +41,9 @@ void Users::get_contact_details(std::string new_phone_number, std::string new_ad
     address = new_address;
 
 }
-int Users::get_special_code(int new_special_code){
+int Users::get_special_code(){
     bool condition_special_code{false};
+    int new_special_code{};
     do {
 
 
@@ -83,6 +81,17 @@ void Users::save_user_to_file(){
     file.close();
 
 }
-void Users::just_display(int key) {
-    std::cout<<people_in_group[8635].size();
+void Users::just_display(int key, int &&value)  {
+    if(value != 4)
+        std::cout<<people_in_group[key].at(value);
+    else {
+        for(char c: people_in_group[key].at(value)) {
+            if(c != '&')
+                std::cout << c;
+            else
+                std::cout <<' ';
+
+        }
+
+    }
 }
