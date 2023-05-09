@@ -25,7 +25,7 @@ void case3() {
     std::string choice{};
 
     while (choice != "3") {
-        std::cout << "Find guest and personal details\n1) By guest code\n2) By room number\n3) Back to menu\n";
+        std::cout << "Find guest and personal details\n1) By guest code\n2) By room number\n3) Back\n";
         std::cin >> choice;
         if (choice == "1") {
             std::cout <<"Enter the guest number: ";

@@ -20,8 +20,10 @@ bool name_checker(std::string  name_to_check){
 
 }
 bool personal_number_checker(std::string personal_number){
-        if(personal_number.size() != 11)
+        if(personal_number.size() != 11) {
+            std::cout << "Invalid value. Try again\n";
             return false;
+        }
         else {
             int tab[] {1, 3, 7, 9, 1, 3, 7, 9, 1, 3, 1, 0};
             int suma {};
@@ -36,8 +38,11 @@ bool personal_number_checker(std::string personal_number){
             if(suma%10 ==0) {
                 return true;
             }
-            else
+            else{
+                std::cout << "Invalid value. Try again\n";
                 return false;
+            }
+
 
         }
 
@@ -55,6 +60,29 @@ bool personal_number_checker(std::string personal_number){
             return true;
         else
             return false;
+
+}
+bool check_post_code(std::string post_code){
+    size_t hyphen{};
+    size_t number{};
+    if(post_code.size() !=6) {
+        return true;
+    }
+
+    for(int i{}; i < post_code.size(); i++){
+        if(i == 2) {
+            if (post_code.at(i) == '-')
+                ++hyphen;
+        }
+        else
+            if(std::isdigit(post_code.at(i)) )
+                ++number;
+    }
+
+    if(hyphen == 1 && number == 5)
+        return false;
+    else
+        return true;
 
 }
 int is_room_ok(){

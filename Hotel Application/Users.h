@@ -31,7 +31,11 @@ public:
 
     int get_special_code();
     void save_user_to_file();
+    void guest_in_past();
     void just_display(int key, int &&value);
+    void delete_guest(int guest_code);
+    bool protection_map(int key_map);
+
 
 };
 

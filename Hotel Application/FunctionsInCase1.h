@@ -58,12 +58,13 @@ std::string get_address(std::string address){
             bool breaker_while_loop {true};  // this sentence breaking loop if contact details are correct and saved, bool is changing for false
             bool condition_for_switch_loop{true}; // correct for all switch, loop starting in 61 line and ending
             do {
-            std::cin.ignore();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             switch (choice) {
                 case '1': { // in first cin, all cases doesn't have break, user has to put all details
-
-                    std::cout << "Post code: ";
-                    post_code = connect_address();
+                    do {
+                        std::cout << "Post code: ";
+                        post_code = connect_address(); // using this function to ignore invalid cin bufor
+                    }while(check_post_code(post_code));
                     post_code+="&";
                     if(condition_for_correct == false)
                         full_address.push_back(post_code);

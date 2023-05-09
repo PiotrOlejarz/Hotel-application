@@ -136,9 +136,37 @@ void Rooms::registr_new_guest(int room_number, int special_code){
         }
         input_file.close();
         output_file.close();
-        // usunięcie pierwotnego pliku
         std::remove("guest_in_rooms.txt");
-        // zmiana nazwy nowego pliku na pierwotną nazwę pliku
+        std::rename("new_guest_in_rooms.txt", "guest_in_rooms.txt");
+    }
+    else {
+        std::cerr << "Unable to open file(s)!" << std::endl;
+    }
+
+}
+void Rooms::check_out(int room_number, int special_code){
+    std::ifstream input_file("guest_in_rooms.txt");
+    std::ofstream output_file("new_guest_in_rooms.txt");
+
+    if (input_file.is_open() && output_file.is_open()) {
+        std::string line;
+        while (std::getline(input_file, line)) {
+            int key;
+            std::string value;
+            std::string special_code_string;
+            special_code_string = std::to_string(special_code);
+
+            std::istringstream iss(line);
+            iss >> key >> value;
+            if (key == room_number) {
+                if(value == special_code_string)
+                    value = "AVAILABLE";
+            }
+            output_file << key << " " << value<< "\n";
+        }
+        input_file.close();
+        output_file.close();
+        std::remove("guest_in_rooms.txt");
         std::rename("new_guest_in_rooms.txt", "guest_in_rooms.txt");
     }
     else {
@@ -159,10 +187,18 @@ bool Rooms::check_room_free(int get_room_number){
 
 
 } //function is checking does room is empty?
-int Rooms::return_guest_number_by_room(int room_number){
-    int convert_guest_code;
-    convert_guest_code = stoi(guests_in_room[room_number]);
-    return convert_guest_code;
+int Rooms::return_guest_number_by_room(int room_number) {
+
+        if (protection_map(room_number)) {
+            int convert_guest_code;
+            if(check_room_free(room_number)) { //checking room status, if is empty return false.
+                convert_guest_code = stoi(guests_in_room[room_number]);
+                return convert_guest_code;
+            }
+        }
+        else
+            return 0;
+
 }
 bool Rooms::protection_map(int key_map){
     if(guests_in_room.count(key_map) > 0)

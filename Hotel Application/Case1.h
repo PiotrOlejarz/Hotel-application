@@ -45,7 +45,7 @@ void case1(){
         std::cout << "Room: " ;
         room = is_room_ok(); // function from checkers, checking int correct
     }
-
+    new_guest.guest_in_past();
     new_guest.save_user_to_file();
     new_room.registr_new_guest(room, special_code);
 

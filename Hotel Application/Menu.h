@@ -12,6 +12,7 @@
 #include "Case1.h"
 #include "Case2.h"
 #include "case3.h"
+#include "case4.h"
 #include <iostream>
 #include <fstream>
 
@@ -19,7 +20,7 @@ void display_menu(){
 std::cout << "1) Registr new guest\n";
 std::cout << "2) Check rooms\n";
 std::cout << "3) Find registred guest\n";
-std::cout << "4) i dont know\n";
+std::cout << "4) Check out guest\n";
 std::cout << "5) Exit\n";
 }
 void menu_switcher(){
@@ -41,16 +42,15 @@ void menu_switcher(){
             }
             case '3':{
                 case3();
-                /*
-                Users nowy_ziom;
-                int xd{};
-                int noxd{};
-                std::cin >> xd;
-                std::cin >> noxd;
-                nowy_ziom.just_display(xd, noxd);
-                 */
+                break;
 
             }
+            case '4':{
+                case4();
+                break;
+            }
+            default:
+                std::cout <<"Invalid choice, try again\n";
         }
     }while(choice != '5');
 }

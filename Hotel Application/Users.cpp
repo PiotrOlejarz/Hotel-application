@@ -75,23 +75,82 @@ void Users::save_user_to_file(){
 
     }
     else{
-        file << std::endl;
         file << special_code << " "<<user_name<<" "<<user_last_name<< " "<<phone_number<<" "<<personal_id_number<<" "<<address<<std::endl;
     }
     file.close();
 
 }
-void Users::just_display(int key, int &&value)  {
-    if(value != 4)
-        std::cout<<people_in_group[key].at(value);
-    else {
-        for(char c: people_in_group[key].at(value)) {
-            if(c != '&')
-                std::cout << c;
-            else
-                std::cout <<' ';
-
-        }
+void Users::guest_in_past(){
+    std::ofstream file("guests.txt", std::ios_base::app);
+    if(!file.is_open()){
+        std::cout << "File failed open ";
 
     }
+    else{
+        file <<personal_id_number<<" "<<user_name<<" "<<user_last_name<< " "<<phone_number<<" "<<address<<std::endl;
+    }
+    file.close();
+
+}
+void Users::just_display(int key, int &&value) {
+    if(protection_map(key)){
+        if (value != 4)
+            std::cout << people_in_group[key].at(value);
+        else {
+            for (char c: people_in_group[key].at(value)) {
+                if (c != '&')
+                    std::cout << c;
+                else
+                    std::cout << ' ';
+
+            }
+
+        }
+    }
+}
+bool Users::protection_map(int key_map){
+    if(people_in_group.count(key_map) > 0)
+        return true;
+    else
+        return false;
+
+}
+void Users::delete_guest(int guest_code) {
+    std::string to_remove{std::to_string(guest_code)+" "};
+    size_t i {0};
+
+    for(auto data : people_in_group[guest_code]) {
+        if(i < 4)
+            data += " ";
+        else
+            data+="\n";
+
+        to_remove += data;
+        ++i;
+    }
+    std::string filename = "guestse.txt";
+    std::ifstream fin(filename);
+    std::ofstream fout(filename + ".temp");
+
+    if (fin.is_open() && fout.is_open()) {
+        std::string line;
+        while (getline(fin, line)) {
+            if (line.back() != '\n') {
+                line += '\n';
+            }
+            if (line != to_remove) {
+                fout << line;
+            }
+        }
+
+        fin.close();
+        fout.close();
+
+        remove(filename.c_str());
+        rename((filename + ".temp").c_str(), filename.c_str());
+        std::cout <<"Guest removed from data base\n";
+    } else {
+        std::cout << "Failed to open file " << filename << std::endl;
+    }
+
 }
